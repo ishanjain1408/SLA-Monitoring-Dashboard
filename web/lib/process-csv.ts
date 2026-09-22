@@ -39,7 +39,7 @@ function normalizeLatency(latencyVal: string, unit: string): number | null {
   return null;
 }
 
-export function processCsvData(csvText: string) {
+export async function processCsvData(csvText: string) {
   // Use csv-parse to parse the text
   const records = parse(csvText, {
     columns: true,
@@ -74,7 +74,7 @@ export function processCsvData(csvText: string) {
   }
 
   // Insert into DB
-  const insertedCount = insertLogs(logsToInsert);
+  const insertedCount = await insertLogs(logsToInsert);
   
   return {
     totalParsed: records.length,

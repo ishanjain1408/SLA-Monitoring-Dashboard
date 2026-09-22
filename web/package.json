@@ -9,7 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "better-sqlite3": "^13.0.3",
+    "@vercel/postgres": "^0.10.0",
     "csv-parse": "^7.0.2",
     "date-fns": "^4.4.0",
     "lucide-react": "^1.47.0",

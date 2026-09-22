@@ -13,7 +13,7 @@ export async function GET(request: Request) {
     const start = startDate || legacyDate;
     const end = endDate || legacyDate;
     
-    const logs = getLogs(page, 100, start, end);
+    const logs = await getLogs(page, 100, start, end);
     return NextResponse.json(logs);
   } catch (error: any) {
     console.error('Logs error:', error);
