@@ -2,6 +2,7 @@ services:
   - type: web
     name: sla-monitoring-dashboard
     env: node
+    rootDir: web
     buildCommand: npm install && npm run build
     startCommand: npm start
     envVars:
