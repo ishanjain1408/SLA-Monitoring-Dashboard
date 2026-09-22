@@ -48,7 +48,7 @@ export function processCsvData(csvText: string) {
 
   const logsToInsert: MonitoringLog[] = [];
 
-  for (const row of records) {
+  for (const row of records as Record<string, string>[]) {
     // Expected columns: service_id, service_name, timestamp, status_code, latency, latency_unit, agent, region
     const tsParsed = parseTimestamp(row.timestamp);
     if (!tsParsed) continue; // Skip invalid timestamps
