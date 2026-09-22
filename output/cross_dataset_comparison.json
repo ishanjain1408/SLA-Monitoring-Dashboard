@@ -1,0 +1,308 @@
+{
+  "datasets": [
+    {
+      "filename": "monitoring_checks_9d_seed101.csv",
+      "total_rows": 4672,
+      "data_quality_issues": 6,
+      "incidents_defined": 1,
+      "svc-reports_availability": 97.6318622174381,
+      "svc-search_availability": 98.93048128342245,
+      "svc-payments_availability": 99.47257383966245,
+      "svc-notify_availability": 99.56896551724138,
+      "svc-auth_availability": 99.46351931330472
+    },
+    {
+      "filename": "monitoring_checks_12d_seed505.csv",
+      "total_rows": 6230,
+      "data_quality_issues": 6,
+      "incidents_defined": 2,
+      "svc-payments_availability": 98.80763116057234,
+      "svc-search_availability": 97.66505636070853,
+      "svc-auth_availability": 99.35691318327974,
+      "svc-reports_availability": 97.72172497965825,
+      "svc-notify_availability": 99.76133651551312
+    },
+    {
+      "filename": "monitoring_checks_14d_seed202.csv",
+      "total_rows": 7269,
+      "data_quality_issues": 6,
+      "incidents_defined": 2,
+      "svc-notify_availability": 97.80068728522336,
+      "svc-search_availability": 99.44903581267218,
+      "svc-auth_availability": 99.65373961218836,
+      "svc-payments_availability": 99.03780068728523,
+      "svc-reports_availability": 96.44565960355435
+    },
+    {
+      "filename": "monitoring_checks_21d_seed303.csv",
+      "total_rows": 10904,
+      "data_quality_issues": 6,
+      "incidents_defined": 1,
+      "svc-payments_availability": 97.71585198720877,
+      "svc-notify_availability": 99.86238532110092,
+      "svc-reports_availability": 97.38532110091744,
+      "svc-search_availability": 99.17582417582418,
+      "svc-auth_availability": 99.81575310916628
+    },
+    {
+      "filename": "monitoring_checks_30d_seed404.csv",
+      "total_rows": 15577,
+      "data_quality_issues": 6,
+      "incidents_defined": 2,
+      "svc-auth_availability": 98.96873992910086,
+      "svc-search_availability": 99.04183966783775,
+      "svc-payments_availability": 98.848,
+      "svc-notify_availability": 99.71153846153847,
+      "svc-reports_availability": 97.22401549386701
+    }
+  ],
+  "per_service_availability": {
+    "svc-reports": [
+      {
+        "filename": "monitoring_checks_9d_seed101.csv",
+        "availability_pct": 97.6318622174381
+      },
+      {
+        "filename": "monitoring_checks_12d_seed505.csv",
+        "availability_pct": 97.72172497965825
+      },
+      {
+        "filename": "monitoring_checks_14d_seed202.csv",
+        "availability_pct": 96.44565960355435
+      },
+      {
+        "filename": "monitoring_checks_21d_seed303.csv",
+        "availability_pct": 97.38532110091744
+      },
+      {
+        "filename": "monitoring_checks_30d_seed404.csv",
+        "availability_pct": 97.22401549386701
+      }
+    ],
+    "svc-search": [
+      {
+        "filename": "monitoring_checks_9d_seed101.csv",
+        "availability_pct": 98.93048128342245
+      },
+      {
+        "filename": "monitoring_checks_12d_seed505.csv",
+        "availability_pct": 97.66505636070853
+      },
+      {
+        "filename": "monitoring_checks_14d_seed202.csv",
+        "availability_pct": 99.44903581267218
+      },
+      {
+        "filename": "monitoring_checks_21d_seed303.csv",
+        "availability_pct": 99.17582417582418
+      },
+      {
+        "filename": "monitoring_checks_30d_seed404.csv",
+        "availability_pct": 99.04183966783775
+      }
+    ],
+    "svc-payments": [
+      {
+        "filename": "monitoring_checks_9d_seed101.csv",
+        "availability_pct": 99.47257383966245
+      },
+      {
+        "filename": "monitoring_checks_12d_seed505.csv",
+        "availability_pct": 98.80763116057234
+      },
+      {
+        "filename": "monitoring_checks_14d_seed202.csv",
+        "availability_pct": 99.03780068728523
+      },
+      {
+        "filename": "monitoring_checks_21d_seed303.csv",
+        "availability_pct": 97.71585198720877
+      },
+      {
+        "filename": "monitoring_checks_30d_seed404.csv",
+        "availability_pct": 98.848
+      }
+    ],
+    "svc-notify": [
+      {
+        "filename": "monitoring_checks_9d_seed101.csv",
+        "availability_pct": 99.56896551724138
+      },
+      {
+        "filename": "monitoring_checks_12d_seed505.csv",
+        "availability_pct": 99.76133651551312
+      },
+      {
+        "filename": "monitoring_checks_14d_seed202.csv",
+        "availability_pct": 97.80068728522336
+      },
+      {
+        "filename": "monitoring_checks_21d_seed303.csv",
+        "availability_pct": 99.86238532110092
+      },
+      {
+        "filename": "monitoring_checks_30d_seed404.csv",
+        "availability_pct": 99.71153846153847
+      }
+    ],
+    "svc-auth": [
+      {
+        "filename": "monitoring_checks_9d_seed101.csv",
+        "availability_pct": 99.46351931330472
+      },
+      {
+        "filename": "monitoring_checks_12d_seed505.csv",
+        "availability_pct": 99.35691318327974
+      },
+      {
+        "filename": "monitoring_checks_14d_seed202.csv",
+        "availability_pct": 99.65373961218836
+      },
+      {
+        "filename": "monitoring_checks_21d_seed303.csv",
+        "availability_pct": 99.81575310916628
+      },
+      {
+        "filename": "monitoring_checks_30d_seed404.csv",
+        "availability_pct": 98.96873992910086
+      }
+    ]
+  },
+  "per_service_latency": {
+    "svc-reports": [
+      {
+        "filename": "monitoring_checks_9d_seed101.csv",
+        "mean_ms": 656.2285092491838,
+        "p95_ms": 843.0
+      },
+      {
+        "filename": "monitoring_checks_12d_seed505.csv",
+        "mean_ms": 647.9810231023102,
+        "p95_ms": 839.0
+      },
+      {
+        "filename": "monitoring_checks_14d_seed202.csv",
+        "mean_ms": 642.1488178025035,
+        "p95_ms": 839.0
+      },
+      {
+        "filename": "monitoring_checks_21d_seed303.csv",
+        "mean_ms": 645.0812064965197,
+        "p95_ms": 838.0
+      },
+      {
+        "filename": "monitoring_checks_30d_seed404.csv",
+        "mean_ms": 656.0218739797584,
+        "p95_ms": 846.0
+      }
+    ],
+    "svc-search": [
+      {
+        "filename": "monitoring_checks_9d_seed101.csv",
+        "mean_ms": 539.4588744588744,
+        "p95_ms": 701.0
+      },
+      {
+        "filename": "monitoring_checks_12d_seed505.csv",
+        "mean_ms": 565.6476810414972,
+        "p95_ms": 710.0
+      },
+      {
+        "filename": "monitoring_checks_14d_seed202.csv",
+        "mean_ms": 542.2487804878049,
+        "p95_ms": 705.0
+      },
+      {
+        "filename": "monitoring_checks_21d_seed303.csv",
+        "mean_ms": 543.8893537889354,
+        "p95_ms": 706.0
+      },
+      {
+        "filename": "monitoring_checks_30d_seed404.csv",
+        "mean_ms": 539.2743134087237,
+        "p95_ms": 700.2999999999997
+      }
+    ],
+    "svc-payments": [
+      {
+        "filename": "monitoring_checks_9d_seed101.csv",
+        "mean_ms": 370.52183173588924,
+        "p95_ms": 483.0
+      },
+      {
+        "filename": "monitoring_checks_12d_seed505.csv",
+        "mean_ms": 371.3086220789686,
+        "p95_ms": 484.0
+      },
+      {
+        "filename": "monitoring_checks_14d_seed202.csv",
+        "mean_ms": 370.68102849200835,
+        "p95_ms": 483.0
+      },
+      {
+        "filename": "monitoring_checks_21d_seed303.csv",
+        "mean_ms": 380.45727482678984,
+        "p95_ms": 484.0
+      },
+      {
+        "filename": "monitoring_checks_30d_seed404.csv",
+        "mean_ms": 372.31345218800647,
+        "p95_ms": 484.0
+      }
+    ],
+    "svc-notify": [
+      {
+        "filename": "monitoring_checks_9d_seed101.csv",
+        "mean_ms": 114.3967032967033,
+        "p95_ms": 148.0
+      },
+      {
+        "filename": "monitoring_checks_12d_seed505.csv",
+        "mean_ms": 112.70337620578778,
+        "p95_ms": 148.0
+      },
+      {
+        "filename": "monitoring_checks_14d_seed202.csv",
+        "mean_ms": 119.40429958391124,
+        "p95_ms": 149.0
+      },
+      {
+        "filename": "monitoring_checks_21d_seed303.csv",
+        "mean_ms": 114.46679052484905,
+        "p95_ms": 148.0
+      },
+      {
+        "filename": "monitoring_checks_30d_seed404.csv",
+        "mean_ms": 113.33506493506493,
+        "p95_ms": 148.0
+      }
+    ],
+    "svc-auth": [
+      {
+        "filename": "monitoring_checks_9d_seed101.csv",
+        "mean_ms": 144.0930735930736,
+        "p95_ms": 186.8499999999999
+      },
+      {
+        "filename": "monitoring_checks_12d_seed505.csv",
+        "mean_ms": 145.6390243902439,
+        "p95_ms": 188.0
+      },
+      {
+        "filename": "monitoring_checks_14d_seed202.csv",
+        "mean_ms": 143.3375350140056,
+        "p95_ms": 186.0
+      },
+      {
+        "filename": "monitoring_checks_21d_seed303.csv",
+        "mean_ms": 144.99627906976744,
+        "p95_ms": 187.0
+      },
+      {
+        "filename": "monitoring_checks_30d_seed404.csv",
+        "mean_ms": 146.39797913950457,
+        "p95_ms": 188.0
+      }
+    ]
+  }
+}

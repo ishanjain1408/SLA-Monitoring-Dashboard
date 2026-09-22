@@ -1,0 +1,6 @@
+filename,total_rows,quality_issues,incidents,expected_days,expected_checks,actual_checks,svc-auth_availability,svc-auth_sla_met,svc-notify_availability,svc-notify_sla_met,svc-payments_availability,svc-payments_sla_met,svc-reports_availability,svc-reports_sla_met,svc-search_availability,svc-search_sla_met
+monitoring_checks_12d_seed505.csv,6230,6,2,12,5760,6230,99.35691318327974,False,99.76133651551312,False,98.80763116057234,False,97.72172497965825,False,97.66505636070853,False
+monitoring_checks_14d_seed202.csv,7269,6,2,14,6720,7269,99.65373961218836,False,97.80068728522336,False,99.03780068728523,False,96.44565960355435,False,99.44903581267218,False
+monitoring_checks_21d_seed303.csv,10904,6,1,21,10080,10904,99.81575310916628,False,99.86238532110092,False,97.71585198720877,False,97.38532110091744,False,99.17582417582418,False
+monitoring_checks_30d_seed404.csv,15577,6,2,30,14400,15577,98.96873992910086,False,99.71153846153847,False,98.848,False,97.22401549386701,False,99.04183966783775,False
+monitoring_checks_9d_seed101.csv,4672,6,1,9,4320,4672,99.46351931330472,False,99.56896551724138,False,99.47257383966245,False,97.6318622174381,False,98.93048128342245,False

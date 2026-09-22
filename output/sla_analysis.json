@@ -1,0 +1,262 @@
+{
+  "monitoring_checks_9d_seed101.csv": {
+    "svc-reports": {
+      "total_checks": 929,
+      "successful_checks": 907,
+      "failed_checks": 22,
+      "availability_pct": 97.6318622174381,
+      "failure_rate_pct": 2.3681377825618943,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 2.268137782561908
+    },
+    "svc-search": {
+      "total_checks": 935,
+      "successful_checks": 925,
+      "failed_checks": 10,
+      "availability_pct": 98.93048128342245,
+      "failure_rate_pct": 1.06951871657754,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 0.9695187165775536
+    },
+    "svc-payments": {
+      "total_checks": 948,
+      "successful_checks": 943,
+      "failed_checks": 5,
+      "availability_pct": 99.47257383966245,
+      "failure_rate_pct": 0.5274261603375527,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 0.42742616033756065
+    },
+    "svc-notify": {
+      "total_checks": 928,
+      "successful_checks": 924,
+      "failed_checks": 4,
+      "availability_pct": 99.56896551724138,
+      "failure_rate_pct": 0.43103448275862066,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 0.3310344827586249
+    },
+    "svc-auth": {
+      "total_checks": 932,
+      "successful_checks": 927,
+      "failed_checks": 5,
+      "availability_pct": 99.46351931330472,
+      "failure_rate_pct": 0.5364806866952789,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 0.4364806866952904
+    }
+  },
+  "monitoring_checks_12d_seed505.csv": {
+    "svc-payments": {
+      "total_checks": 1258,
+      "successful_checks": 1243,
+      "failed_checks": 15,
+      "availability_pct": 98.80763116057234,
+      "failure_rate_pct": 1.192368839427663,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 1.0923688394276638
+    },
+    "svc-search": {
+      "total_checks": 1242,
+      "successful_checks": 1213,
+      "failed_checks": 29,
+      "availability_pct": 97.66505636070853,
+      "failure_rate_pct": 2.3349436392914655,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 2.2349436392914726
+    },
+    "svc-auth": {
+      "total_checks": 1244,
+      "successful_checks": 1236,
+      "failed_checks": 8,
+      "availability_pct": 99.35691318327974,
+      "failure_rate_pct": 0.6430868167202572,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 0.5430868167202618
+    },
+    "svc-reports": {
+      "total_checks": 1229,
+      "successful_checks": 1201,
+      "failed_checks": 28,
+      "availability_pct": 97.72172497965825,
+      "failure_rate_pct": 2.2782750203417415,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 2.178275020341758
+    },
+    "svc-notify": {
+      "total_checks": 1257,
+      "successful_checks": 1254,
+      "failed_checks": 3,
+      "availability_pct": 99.76133651551312,
+      "failure_rate_pct": 0.23866348448687352,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 0.1386634844868837
+    }
+  },
+  "monitoring_checks_14d_seed202.csv": {
+    "svc-notify": {
+      "total_checks": 1455,
+      "successful_checks": 1423,
+      "failed_checks": 32,
+      "availability_pct": 97.80068728522336,
+      "failure_rate_pct": 2.1993127147766325,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 2.0993127147766444
+    },
+    "svc-search": {
+      "total_checks": 1452,
+      "successful_checks": 1444,
+      "failed_checks": 8,
+      "availability_pct": 99.44903581267218,
+      "failure_rate_pct": 0.5509641873278237,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 0.45096418732782695
+    },
+    "svc-auth": {
+      "total_checks": 1444,
+      "successful_checks": 1439,
+      "failed_checks": 5,
+      "availability_pct": 99.65373961218836,
+      "failure_rate_pct": 0.3462603878116343,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 0.2462603878116454
+    },
+    "svc-payments": {
+      "total_checks": 1455,
+      "successful_checks": 1441,
+      "failed_checks": 14,
+      "availability_pct": 99.03780068728523,
+      "failure_rate_pct": 0.9621993127147767,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 0.8621993127147789
+    },
+    "svc-reports": {
+      "total_checks": 1463,
+      "successful_checks": 1411,
+      "failed_checks": 52,
+      "availability_pct": 96.44565960355435,
+      "failure_rate_pct": 3.55434039644566,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 3.4543403964456587
+    }
+  },
+  "monitoring_checks_21d_seed303.csv": {
+    "svc-payments": {
+      "total_checks": 2189,
+      "successful_checks": 2139,
+      "failed_checks": 50,
+      "availability_pct": 97.71585198720877,
+      "failure_rate_pct": 2.284148012791229,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 2.1841480127912405
+    },
+    "svc-notify": {
+      "total_checks": 2180,
+      "successful_checks": 2177,
+      "failed_checks": 3,
+      "availability_pct": 99.86238532110092,
+      "failure_rate_pct": 0.13761467889908258,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 0.037614678899089427
+    },
+    "svc-reports": {
+      "total_checks": 2180,
+      "successful_checks": 2123,
+      "failed_checks": 57,
+      "availability_pct": 97.38532110091744,
+      "failure_rate_pct": 2.614678899082569,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 2.5146788990825684
+    },
+    "svc-search": {
+      "total_checks": 2184,
+      "successful_checks": 2166,
+      "failed_checks": 18,
+      "availability_pct": 99.17582417582418,
+      "failure_rate_pct": 0.8241758241758242,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 0.7241758241758305
+    },
+    "svc-auth": {
+      "total_checks": 2171,
+      "successful_checks": 2167,
+      "failed_checks": 4,
+      "availability_pct": 99.81575310916628,
+      "failure_rate_pct": 0.18424689083371718,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 0.08424689083372527
+    }
+  },
+  "monitoring_checks_30d_seed404.csv": {
+    "svc-auth": {
+      "total_checks": 3103,
+      "successful_checks": 3071,
+      "failed_checks": 32,
+      "availability_pct": 98.96873992910086,
+      "failure_rate_pct": 1.03126007089913,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 0.9312600708991425
+    },
+    "svc-search": {
+      "total_checks": 3131,
+      "successful_checks": 3101,
+      "failed_checks": 30,
+      "availability_pct": 99.04183966783775,
+      "failure_rate_pct": 0.9581603321622485,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 0.8581603321622566
+    },
+    "svc-payments": {
+      "total_checks": 3125,
+      "successful_checks": 3089,
+      "failed_checks": 36,
+      "availability_pct": 98.848,
+      "failure_rate_pct": 1.1520000000000001,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 1.0520000000000067
+    },
+    "svc-notify": {
+      "total_checks": 3120,
+      "successful_checks": 3111,
+      "failed_checks": 9,
+      "availability_pct": 99.71153846153847,
+      "failure_rate_pct": 0.2884615384615385,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 0.18846153846153868
+    },
+    "svc-reports": {
+      "total_checks": 3098,
+      "successful_checks": 3012,
+      "failed_checks": 86,
+      "availability_pct": 97.22401549386701,
+      "failure_rate_pct": 2.775984506132989,
+      "sla_threshold": 99.9,
+      "sla_met": false,
+      "sla_gap_pct": 2.675984506132991
+    }
+  }
+}

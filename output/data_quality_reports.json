@@ -1,0 +1,727 @@
+[
+  {
+    "filename": "monitoring_checks_9d_seed101.csv",
+    "stats": {
+      "total_rows": 4672,
+      "columns": [
+        "service_id",
+        "service_name",
+        "timestamp",
+        "status_code",
+        "latency",
+        "latency_unit",
+        "agent",
+        "region"
+      ],
+      "expected_columns": [
+        "service_id",
+        "service_name",
+        "timestamp",
+        "status_code",
+        "latency",
+        "latency_unit",
+        "agent",
+        "region"
+      ],
+      "unique_services": [
+        "svc-auth",
+        "svc-notify",
+        "svc-payments",
+        "svc-reports",
+        "svc-search"
+      ],
+      "timestamp_formats": {
+        "ISO_UTC (Z)": 4570,
+        "ISO_with_offset": 32,
+        "Unix_epoch": 70,
+        "Other/Invalid": 0
+      },
+      "unique_status_codes": [
+        "200",
+        "500",
+        "502",
+        "503",
+        "999"
+      ],
+      "unique_latency_units": [
+        "ms",
+        "s"
+      ],
+      "unique_agents": [
+        "agent-1",
+        "agent-2"
+      ],
+      "unique_regions": [
+        "ap-south-1"
+      ]
+    },
+    "issues": [
+      {
+        "category": "MISSING_VALUES",
+        "description": "Column 'latency': 56 missing/empty values (56 null, 0 empty string)",
+        "count": "56"
+      },
+      {
+        "category": "TIMESTAMP_FORMAT",
+        "description": "Non-UTC timezone offsets found in timestamps",
+        "count": 32,
+        "examples": [
+          "2025-05-13T02:00:00+05:30",
+          "2025-05-16T19:00:00+05:30",
+          "2025-05-10T16:30:00+05:30",
+          "2025-05-11T16:15:00+05:30",
+          "2025-05-14T19:30:00+05:30"
+        ]
+      },
+      {
+        "category": "TIMESTAMP_FORMAT",
+        "description": "Unix epoch timestamps found (should be ISO 8601)",
+        "count": 70,
+        "examples": [
+          "1746938700",
+          "1747319400",
+          "1747090800",
+          "1746862200",
+          "1746834300"
+        ]
+      },
+      {
+        "category": "LATENCY",
+        "description": "Negative latency values found",
+        "count": "1"
+      },
+      {
+        "category": "DUPLICATES",
+        "description": "Exact duplicate rows found",
+        "count": "6"
+      },
+      {
+        "category": "DUPLICATE_KEYS",
+        "description": "Duplicate (service_id, timestamp) combinations found",
+        "count": "678",
+        "examples": [
+          {
+            "service_id": "svc-auth",
+            "timestamp": "2025-05-14T18:00:00Z"
+          },
+          {
+            "service_id": "svc-payments",
+            "timestamp": "2025-05-16T06:45:00Z"
+          },
+          {
+            "service_id": "svc-auth",
+            "timestamp": "2025-05-13T08:30:00Z"
+          },
+          {
+            "service_id": "svc-notify",
+            "timestamp": "2025-05-08T12:15:00Z"
+          },
+          {
+            "service_id": "svc-search",
+            "timestamp": "2025-05-15T17:45:00Z"
+          },
+          {
+            "service_id": "svc-payments",
+            "timestamp": "2025-05-14T14:45:00Z"
+          },
+          {
+            "service_id": "svc-search",
+            "timestamp": "2025-05-08T11:00:00Z"
+          },
+          {
+            "service_id": "svc-auth",
+            "timestamp": "2025-05-14T13:30:00Z"
+          },
+          {
+            "service_id": "svc-auth",
+            "timestamp": "2025-05-08T10:00:00Z"
+          },
+          {
+            "service_id": "svc-notify",
+            "timestamp": "2025-05-12T02:45:00Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "filename": "monitoring_checks_12d_seed505.csv",
+    "stats": {
+      "total_rows": 6230,
+      "columns": [
+        "service_id",
+        "service_name",
+        "timestamp",
+        "status_code",
+        "latency",
+        "latency_unit",
+        "agent",
+        "region"
+      ],
+      "expected_columns": [
+        "service_id",
+        "service_name",
+        "timestamp",
+        "status_code",
+        "latency",
+        "latency_unit",
+        "agent",
+        "region"
+      ],
+      "unique_services": [
+        "svc-auth",
+        "svc-notify",
+        "svc-payments",
+        "svc-reports",
+        "svc-search"
+      ],
+      "timestamp_formats": {
+        "ISO_UTC (Z)": 6094,
+        "ISO_with_offset": 43,
+        "Unix_epoch": 93,
+        "Other/Invalid": 0
+      },
+      "unique_status_codes": [
+        "200",
+        "500",
+        "502",
+        "503",
+        "999"
+      ],
+      "unique_latency_units": [
+        "ms",
+        "s"
+      ],
+      "unique_agents": [
+        "agent-1",
+        "agent-2"
+      ],
+      "unique_regions": [
+        "ap-south-1"
+      ]
+    },
+    "issues": [
+      {
+        "category": "MISSING_VALUES",
+        "description": "Column 'latency': 74 missing/empty values (74 null, 0 empty string)",
+        "count": "74"
+      },
+      {
+        "category": "TIMESTAMP_FORMAT",
+        "description": "Non-UTC timezone offsets found in timestamps",
+        "count": 43,
+        "examples": [
+          "2025-04-12T14:15:00+05:30",
+          "2025-04-13T10:45:00+05:30",
+          "2025-04-18T08:15:00+05:30",
+          "2025-04-12T23:00:00+05:30",
+          "2025-04-13T22:15:00+05:30"
+        ]
+      },
+      {
+        "category": "TIMESTAMP_FORMAT",
+        "description": "Unix epoch timestamps found (should be ISO 8601)",
+        "count": 93,
+        "examples": [
+          "1744349400",
+          "1745064900",
+          "1744467300",
+          "1745147700",
+          "1744989300"
+        ]
+      },
+      {
+        "category": "LATENCY",
+        "description": "Negative latency values found",
+        "count": "1"
+      },
+      {
+        "category": "DUPLICATES",
+        "description": "Exact duplicate rows found",
+        "count": "8"
+      },
+      {
+        "category": "DUPLICATE_KEYS",
+        "description": "Duplicate (service_id, timestamp) combinations found",
+        "count": "902",
+        "examples": [
+          {
+            "service_id": "svc-search",
+            "timestamp": "2025-04-10T13:15:00Z"
+          },
+          {
+            "service_id": "svc-auth",
+            "timestamp": "2025-04-14T06:30:00Z"
+          },
+          {
+            "service_id": "svc-payments",
+            "timestamp": "2025-04-15T04:45:00Z"
+          },
+          {
+            "service_id": "svc-search",
+            "timestamp": "2025-04-21T07:45:00Z"
+          },
+          {
+            "service_id": "svc-auth",
+            "timestamp": "2025-04-11T06:00:00Z"
+          },
+          {
+            "service_id": "svc-auth",
+            "timestamp": "2025-04-20T10:15:00Z"
+          },
+          {
+            "service_id": "svc-payments",
+            "timestamp": "2025-04-12T22:00:00Z"
+          },
+          {
+            "service_id": "svc-reports",
+            "timestamp": "2025-04-11T20:15:00Z"
+          },
+          {
+            "service_id": "svc-payments",
+            "timestamp": "2025-04-20T11:30:00Z"
+          },
+          {
+            "service_id": "svc-payments",
+            "timestamp": "2025-04-11T20:15:00Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "filename": "monitoring_checks_14d_seed202.csv",
+    "stats": {
+      "total_rows": 7269,
+      "columns": [
+        "service_id",
+        "service_name",
+        "timestamp",
+        "status_code",
+        "latency",
+        "latency_unit",
+        "agent",
+        "region"
+      ],
+      "expected_columns": [
+        "service_id",
+        "service_name",
+        "timestamp",
+        "status_code",
+        "latency",
+        "latency_unit",
+        "agent",
+        "region"
+      ],
+      "unique_services": [
+        "svc-auth",
+        "svc-notify",
+        "svc-payments",
+        "svc-reports",
+        "svc-search"
+      ],
+      "timestamp_formats": {
+        "ISO_UTC (Z)": 7110,
+        "ISO_with_offset": 50,
+        "Unix_epoch": 109,
+        "Other/Invalid": 0
+      },
+      "unique_status_codes": [
+        "200",
+        "500",
+        "502",
+        "503",
+        "999"
+      ],
+      "unique_latency_units": [
+        "ms",
+        "s"
+      ],
+      "unique_agents": [
+        "agent-1",
+        "agent-2"
+      ],
+      "unique_regions": [
+        "ap-south-1"
+      ]
+    },
+    "issues": [
+      {
+        "category": "MISSING_VALUES",
+        "description": "Column 'latency': 87 missing/empty values (87 null, 0 empty string)",
+        "count": "87"
+      },
+      {
+        "category": "TIMESTAMP_FORMAT",
+        "description": "Non-UTC timezone offsets found in timestamps",
+        "count": 50,
+        "examples": [
+          "2025-05-26T11:15:00+05:30",
+          "2025-05-19T23:45:00+05:30",
+          "2025-05-31T21:45:00+05:30",
+          "2025-05-22T04:30:00+05:30",
+          "2025-05-27T04:45:00+05:30"
+        ]
+      },
+      {
+        "category": "TIMESTAMP_FORMAT",
+        "description": "Unix epoch timestamps found (should be ISO 8601)",
+        "count": 109,
+        "examples": [
+          "1748729700",
+          "1748548800",
+          "1747834200",
+          "1748430900",
+          "1748249100"
+        ]
+      },
+      {
+        "category": "LATENCY",
+        "description": "Negative latency values found",
+        "count": "1"
+      },
+      {
+        "category": "DUPLICATES",
+        "description": "Exact duplicate rows found",
+        "count": "10"
+      },
+      {
+        "category": "DUPLICATE_KEYS",
+        "description": "Duplicate (service_id, timestamp) combinations found",
+        "count": "1055",
+        "examples": [
+          {
+            "service_id": "svc-notify",
+            "timestamp": "2025-05-23T11:00:00Z"
+          },
+          {
+            "service_id": "svc-payments",
+            "timestamp": "2025-05-20T21:15:00Z"
+          },
+          {
+            "service_id": "svc-auth",
+            "timestamp": "2025-05-20T16:15:00Z"
+          },
+          {
+            "service_id": "svc-search",
+            "timestamp": "2025-05-22T05:15:00Z"
+          },
+          {
+            "service_id": "svc-auth",
+            "timestamp": "2025-05-19T05:30:00Z"
+          },
+          {
+            "service_id": "svc-payments",
+            "timestamp": "2025-05-24T20:45:00Z"
+          },
+          {
+            "service_id": "svc-reports",
+            "timestamp": "2025-06-01T01:30:00Z"
+          },
+          {
+            "service_id": "svc-auth",
+            "timestamp": "2025-05-19T03:15:00Z"
+          },
+          {
+            "service_id": "svc-auth",
+            "timestamp": "2025-05-25T00:45:00Z"
+          },
+          {
+            "service_id": "svc-search",
+            "timestamp": "2025-05-30T08:00:00Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "filename": "monitoring_checks_21d_seed303.csv",
+    "stats": {
+      "total_rows": 10904,
+      "columns": [
+        "service_id",
+        "service_name",
+        "timestamp",
+        "status_code",
+        "latency",
+        "latency_unit",
+        "agent",
+        "region"
+      ],
+      "expected_columns": [
+        "service_id",
+        "service_name",
+        "timestamp",
+        "status_code",
+        "latency",
+        "latency_unit",
+        "agent",
+        "region"
+      ],
+      "unique_services": [
+        "svc-auth",
+        "svc-notify",
+        "svc-payments",
+        "svc-reports",
+        "svc-search"
+      ],
+      "timestamp_formats": {
+        "ISO_UTC (Z)": 10665,
+        "ISO_with_offset": 76,
+        "Unix_epoch": 163,
+        "Other/Invalid": 0
+      },
+      "unique_status_codes": [
+        "200",
+        "500",
+        "502",
+        "503",
+        "999"
+      ],
+      "unique_latency_units": [
+        "ms",
+        "s"
+      ],
+      "unique_agents": [
+        "agent-1",
+        "agent-2"
+      ],
+      "unique_regions": [
+        "ap-south-1"
+      ]
+    },
+    "issues": [
+      {
+        "category": "MISSING_VALUES",
+        "description": "Column 'latency': 130 missing/empty values (130 null, 0 empty string)",
+        "count": "130"
+      },
+      {
+        "category": "TIMESTAMP_FORMAT",
+        "description": "Non-UTC timezone offsets found in timestamps",
+        "count": 76,
+        "examples": [
+          "2025-04-13T23:45:00+05:30",
+          "2025-04-13T07:45:00+05:30",
+          "2025-04-15T16:00:00+05:30",
+          "2025-04-04T10:15:00+05:30",
+          "2025-04-17T00:15:00+05:30"
+        ]
+      },
+      {
+        "category": "TIMESTAMP_FORMAT",
+        "description": "Unix epoch timestamps found (should be ISO 8601)",
+        "count": 163,
+        "examples": [
+          "1744740000",
+          "1743726600",
+          "1744965900",
+          "1743750000",
+          "1743915600"
+        ]
+      },
+      {
+        "category": "LATENCY",
+        "description": "Negative latency values found",
+        "count": "1"
+      },
+      {
+        "category": "DUPLICATES",
+        "description": "Exact duplicate rows found",
+        "count": "18"
+      },
+      {
+        "category": "DUPLICATE_KEYS",
+        "description": "Duplicate (service_id, timestamp) combinations found",
+        "count": "1579",
+        "examples": [
+          {
+            "service_id": "svc-notify",
+            "timestamp": "2025-04-22T01:45:00Z"
+          },
+          {
+            "service_id": "svc-notify",
+            "timestamp": "2025-04-11T06:00:00Z"
+          },
+          {
+            "service_id": "svc-search",
+            "timestamp": "2025-04-13T14:00:00Z"
+          },
+          {
+            "service_id": "svc-notify",
+            "timestamp": "2025-04-09T20:00:00Z"
+          },
+          {
+            "service_id": "svc-notify",
+            "timestamp": "2025-04-16T17:15:00Z"
+          },
+          {
+            "service_id": "svc-payments",
+            "timestamp": "2025-04-13T06:45:00Z"
+          },
+          {
+            "service_id": "svc-payments",
+            "timestamp": "2025-04-19T13:30:00Z"
+          },
+          {
+            "service_id": "svc-search",
+            "timestamp": "2025-04-23T08:15:00Z"
+          },
+          {
+            "service_id": "svc-auth",
+            "timestamp": "2025-04-22T14:15:00Z"
+          },
+          {
+            "service_id": "svc-reports",
+            "timestamp": "2025-04-05T15:30:00Z"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "filename": "monitoring_checks_30d_seed404.csv",
+    "stats": {
+      "total_rows": 15577,
+      "columns": [
+        "service_id",
+        "service_name",
+        "timestamp",
+        "status_code",
+        "latency",
+        "latency_unit",
+        "agent",
+        "region"
+      ],
+      "expected_columns": [
+        "service_id",
+        "service_name",
+        "timestamp",
+        "status_code",
+        "latency",
+        "latency_unit",
+        "agent",
+        "region"
+      ],
+      "unique_services": [
+        "svc-auth",
+        "svc-notify",
+        "svc-payments",
+        "svc-reports",
+        "svc-search"
+      ],
+      "timestamp_formats": {
+        "ISO_UTC (Z)": 15235,
+        "ISO_with_offset": 109,
+        "Unix_epoch": 233,
+        "Other/Invalid": 0
+      },
+      "unique_status_codes": [
+        "200",
+        "500",
+        "502",
+        "503",
+        "999"
+      ],
+      "unique_latency_units": [
+        "ms",
+        "s"
+      ],
+      "unique_agents": [
+        "agent-1",
+        "agent-2"
+      ],
+      "unique_regions": [
+        "ap-south-1"
+      ]
+    },
+    "issues": [
+      {
+        "category": "MISSING_VALUES",
+        "description": "Column 'latency': 186 missing/empty values (186 null, 0 empty string)",
+        "count": "186"
+      },
+      {
+        "category": "TIMESTAMP_FORMAT",
+        "description": "Non-UTC timezone offsets found in timestamps",
+        "count": 109,
+        "examples": [
+          "2025-04-26T04:00:00+05:30",
+          "2025-04-18T13:00:00+05:30",
+          "2025-05-05T16:00:00+05:30",
+          "2025-04-18T02:30:00+05:30",
+          "2025-04-09T00:00:00+05:30"
+        ]
+      },
+      {
+        "category": "TIMESTAMP_FORMAT",
+        "description": "Unix epoch timestamps found (should be ISO 8601)",
+        "count": 233,
+        "examples": [
+          "1745982900",
+          "1746362700",
+          "1744429500",
+          "1745127000",
+          "1744994700"
+        ]
+      },
+      {
+        "category": "LATENCY",
+        "description": "Negative latency values found",
+        "count": "1"
+      },
+      {
+        "category": "DUPLICATES",
+        "description": "Exact duplicate rows found",
+        "count": "24"
+      },
+      {
+        "category": "DUPLICATE_KEYS",
+        "description": "Duplicate (service_id, timestamp) combinations found",
+        "count": "2260",
+        "examples": [
+          {
+            "service_id": "svc-auth",
+            "timestamp": "2025-04-25T12:15:00Z"
+          },
+          {
+            "service_id": "svc-notify",
+            "timestamp": "2025-04-25T03:45:00Z"
+          },
+          {
+            "service_id": "svc-payments",
+            "timestamp": "2025-04-26T23:00:00Z"
+          },
+          {
+            "service_id": "svc-search",
+            "timestamp": "2025-04-22T05:45:00Z"
+          },
+          {
+            "service_id": "svc-payments",
+            "timestamp": "2025-04-29T19:45:00Z"
+          },
+          {
+            "service_id": "svc-reports",
+            "timestamp": "2025-04-19T02:45:00Z"
+          },
+          {
+            "service_id": "svc-reports",
+            "timestamp": "2025-04-30T01:15:00Z"
+          },
+          {
+            "service_id": "svc-notify",
+            "timestamp": "2025-04-11T21:45:00Z"
+          },
+          {
+            "service_id": "svc-auth",
+            "timestamp": "2025-04-29T06:45:00Z"
+          },
+          {
+            "service_id": "svc-payments",
+            "timestamp": "2025-04-16T17:45:00Z"
+          }
+        ]
+      }
+    ]
+  }
+]
