@@ -64,8 +64,12 @@ npm run dev
 
 The system is architected as a Next.js serverless app, which is the native stack for **Vercel** (Free Tier). 
 
-1. Create a free **Postgres** database in Vercel Storage.
-2. Swap `better-sqlite3` for `@vercel/postgres` in `web/lib/db.ts` (the SQL syntax remains standard).
+> [!WARNING]
+> **Important Note on SQLite and Vercel Deployment:** By default, this app uses `better-sqlite3` for local development. However, deploying this to Vercel as-is will result in an **"Unexpected end of JSON input"** error on the frontend. This happens because Vercel's serverless environment has a read-only filesystem, ephemeral storage, and lacks native module support, causing the SQLite API routes to crash. **You MUST migrate to a cloud database before deploying.**
+
+To deploy successfully:
+1. Create a free **Postgres** database in Vercel Storage (or use Supabase, Neon, etc.).
+2. Swap `better-sqlite3` for a cloud database client (e.g., `@vercel/postgres`) in `web/lib/db.ts`.
 3. Run `npx vercel` from the `web/` directory.
 4. **Live URL:** Vercel will automatically provision a live serverless URL (e.g., `https://earthre-sla.vercel.app`) where the Upload UI and API function will live. 
 
