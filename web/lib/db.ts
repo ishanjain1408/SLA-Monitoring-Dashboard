@@ -1,28 +1,6 @@
-import Database from 'better-sqlite3';
-import path from 'path';
+import { PrismaClient } from '@prisma/client';
 
-// Connect to SQLite DB in the root of the project
-const dbPath = path.join(process.cwd(), 'earthre_sla.db');
-const db = new Database(dbPath, { verbose: console.log });
-
-// Initialize database schema
-db.pragma('journal_mode = WAL');
-
-db.exec(`
-  CREATE TABLE IF NOT EXISTS monitoring_logs (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    service_id TEXT NOT NULL,
-    service_name TEXT,
-    timestamp TEXT NOT NULL,
-    status_code INTEGER,
-    latency_ms REAL,
-    is_success BOOLEAN,
-    agent TEXT,
-    region TEXT,
-    date TEXT,
-    UNIQUE(service_id, timestamp, agent)
-  );
-`);
+const prisma = new PrismaClient();
 
 export interface MonitoringLog {
   service_id: string;
@@ -36,97 +14,68 @@ export interface MonitoringLog {
   date: string;
 }
 
-export function insertLogs(logs: MonitoringLog[]) {
-  const insert = db.prepare(`
-    INSERT OR IGNORE INTO monitoring_logs (
-      service_id, service_name, timestamp, status_code, latency_ms, is_success, agent, region, date
-    ) VALUES (
-      @service_id, @service_name, @timestamp, @status_code, @latency_ms, @is_success, @agent, @region, @date
-    )
-  `);
-
-  const insertMany = db.transaction((logsToInsert: MonitoringLog[]) => {
-    let inserted = 0;
-    for (const log of logsToInsert) {
-      const res = insert.run({
-        service_id: log.service_id,
-        service_name: log.service_name,
-        timestamp: log.timestamp,
-        status_code: log.status_code,
-        latency_ms: log.latency_ms,
-        is_success: log.is_success ? 1 : 0,
-        agent: log.agent,
-        region: log.region,
-        date: log.date
-      });
-      if (res.changes > 0) inserted++;
-    }
-    return inserted;
+export async function insertLogs(logs: MonitoringLog[]) {
+  const res = await prisma.monitoringLog.createMany({
+    data: logs,
+    skipDuplicates: true,
   });
-
-  return insertMany(logs);
+  return res.count;
 }
 
-export function getStats() {
-  const statsQuery = db.prepare(`
+export async function getStats() {
+  const rawStats = await prisma.$queryRaw`
     SELECT 
       service_id,
       COUNT(*) as total_checks,
       SUM(CASE WHEN is_success = 1 THEN 1 ELSE 0 END) as successful_checks
-    FROM monitoring_logs
+    FROM MonitoringLog
     GROUP BY service_id
-  `);
+  ` as { service_id: string, total_checks: number | bigint, successful_checks: number | bigint }[];
   
-  const stats = statsQuery.all() as { service_id: string, total_checks: number, successful_checks: number }[];
-  
-  return stats.map(s => {
-    const availability = (s.successful_checks / s.total_checks) * 100;
+  return rawStats.map(s => {
+    const total = Number(s.total_checks);
+    const successful = Number(s.successful_checks);
+    const availability = total > 0 ? (successful / total) * 100 : 0;
     return {
-      ...s,
+      service_id: s.service_id,
+      total_checks: total,
+      successful_checks: successful,
       availability_pct: parseFloat(availability.toFixed(4)),
       is_breached: availability < 99.9
     };
   });
 }
 
-export function getLogs(page = 1, limit = 100, startDate?: string, endDate?: string) {
-  const offset = (page - 1) * limit;
-  let query = 'SELECT * FROM monitoring_logs';
-  const params: any[] = [];
+export async function getLogs(page = 1, limit = 100, startDate?: string, endDate?: string) {
+  const skip = (page - 1) * limit;
+  const where: any = {};
   
   if (startDate && endDate) {
-    query += ' WHERE date >= ? AND date <= ?';
-    params.push(startDate, endDate);
+    where.date = { gte: startDate, lte: endDate };
   } else if (startDate) {
-    query += ' WHERE date = ?';
-    params.push(startDate);
+    where.date = startDate;
   } else if (endDate) {
-    query += ' WHERE date = ?';
-    params.push(endDate);
+    where.date = endDate;
   }
   
-  query += ' ORDER BY timestamp DESC LIMIT ? OFFSET ?';
-  params.push(limit, offset);
+  const [logs, total] = await Promise.all([
+    prisma.monitoringLog.findMany({
+      where,
+      orderBy: { timestamp: 'desc' },
+      take: limit,
+      skip,
+    }),
+    prisma.monitoringLog.count({ where })
+  ]);
   
-  let countQuery;
-  if (startDate && endDate) {
-    countQuery = db.prepare('SELECT COUNT(*) as count FROM monitoring_logs WHERE date >= ? AND date <= ?').get(startDate, endDate) as { count: number };
-  } else if (startDate) {
-    countQuery = db.prepare('SELECT COUNT(*) as count FROM monitoring_logs WHERE date = ?').get(startDate) as { count: number };
-  } else if (endDate) {
-    countQuery = db.prepare('SELECT COUNT(*) as count FROM monitoring_logs WHERE date = ?').get(endDate) as { count: number };
-  } else {
-    countQuery = db.prepare('SELECT COUNT(*) as count FROM monitoring_logs').get() as { count: number };
-  }
-    
   return {
-    logs: db.prepare(query).all(...params),
-    total: countQuery.count,
+    logs,
+    total,
     page,
-    totalPages: Math.ceil(countQuery.count / limit)
+    totalPages: Math.ceil(total / limit)
   };
 }
 
-export function clearDatabase() {
-  db.exec('DELETE FROM monitoring_logs');
+export async function clearDatabase() {
+  await prisma.monitoringLog.deleteMany({});
 }

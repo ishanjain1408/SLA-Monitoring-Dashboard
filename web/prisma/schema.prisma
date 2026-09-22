@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model MonitoringLog {
+  id           Int      @id @default(autoincrement())
+  service_id   String
+  service_name String?
+  timestamp    String
+  status_code  Int?
+  latency_ms   Float?
+  is_success   Boolean?
+  agent        String?
+  region       String?
+  date         String?
+
+  @@unique([service_id, timestamp, agent])
+}
