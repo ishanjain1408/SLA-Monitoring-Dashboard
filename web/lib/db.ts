@@ -1,4 +1,28 @@
-import { createClient } from '@vercel/postgres';
+import Database from 'better-sqlite3';
+import path from 'path';
+
+// Connect to SQLite DB in the root of the project
+const dbPath = path.join(process.cwd(), 'earthre_sla.db');
+const db = new Database(dbPath, { verbose: console.log });
+
+// Initialize database schema
+db.pragma('journal_mode = WAL');
+
+db.exec(`
+  CREATE TABLE IF NOT EXISTS monitoring_logs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    service_id TEXT NOT NULL,
+    service_name TEXT,
+    timestamp TEXT NOT NULL,
+    status_code INTEGER,
+    latency_ms REAL,
+    is_success BOOLEAN,
+    agent TEXT,
+    region TEXT,
+    date TEXT,
+    UNIQUE(service_id, timestamp, agent)
+  );
+`);
 
 export interface MonitoringLog {
   service_id: string;
@@ -12,79 +36,50 @@ export interface MonitoringLog {
   date: string;
 }
 
-// Helper to handle the direct connection client instead of the pooled sql tag
-async function withClient<T>(queryFn: (client: any) => Promise<T>): Promise<T> {
-  const client = createClient();
-  await client.connect();
-  try {
-    return await queryFn(client);
-  } finally {
-    await client.end();
-  }
-}
+export function insertLogs(logs: MonitoringLog[]) {
+  const insert = db.prepare(`
+    INSERT OR IGNORE INTO monitoring_logs (
+      service_id, service_name, timestamp, status_code, latency_ms, is_success, agent, region, date
+    ) VALUES (
+      @service_id, @service_name, @timestamp, @status_code, @latency_ms, @is_success, @agent, @region, @date
+    )
+  `);
 
-export async function initDb() {
-  await withClient(async (client) => {
-    await client.sql`
-      CREATE TABLE IF NOT EXISTS monitoring_logs (
-        id SERIAL PRIMARY KEY,
-        service_id VARCHAR(255) NOT NULL,
-        service_name VARCHAR(255),
-        timestamp TIMESTAMP WITH TIME ZONE NOT NULL,
-        status_code INTEGER,
-        latency_ms REAL,
-        is_success BOOLEAN,
-        agent VARCHAR(255),
-        region VARCHAR(255),
-        date DATE,
-        UNIQUE(service_id, timestamp, agent)
-      );
-    `;
-  });
-}
-
-export async function insertLogs(logs: MonitoringLog[]) {
-  await initDb();
-  let inserted = 0;
-  
-  await withClient(async (client) => {
-    for (const log of logs) {
-      try {
-        const res = await client.sql`
-          INSERT INTO monitoring_logs (
-            service_id, service_name, timestamp, status_code, latency_ms, is_success, agent, region, date
-          ) VALUES (
-            ${log.service_id}, ${log.service_name}, ${log.timestamp}, ${log.status_code}, ${log.latency_ms}, ${log.is_success}, ${log.agent}, ${log.region}, ${log.date}
-          )
-          ON CONFLICT (service_id, timestamp, agent) DO NOTHING
-        `;
-        if (res.rowCount && res.rowCount > 0) inserted++;
-      } catch (e) {
-        console.error('Failed to insert log', log, e);
-      }
+  const insertMany = db.transaction((logsToInsert: MonitoringLog[]) => {
+    let inserted = 0;
+    for (const log of logsToInsert) {
+      const res = insert.run({
+        service_id: log.service_id,
+        service_name: log.service_name,
+        timestamp: log.timestamp,
+        status_code: log.status_code,
+        latency_ms: log.latency_ms,
+        is_success: log.is_success ? 1 : 0,
+        agent: log.agent,
+        region: log.region,
+        date: log.date
+      });
+      if (res.changes > 0) inserted++;
     }
+    return inserted;
   });
-  
-  return inserted;
+
+  return insertMany(logs);
 }
 
-export async function getStats() {
-  await initDb();
+export function getStats() {
+  const statsQuery = db.prepare(`
+    SELECT 
+      service_id,
+      COUNT(*) as total_checks,
+      SUM(CASE WHEN is_success = 1 THEN 1 ELSE 0 END) as successful_checks
+    FROM monitoring_logs
+    GROUP BY service_id
+  `);
   
-  const result = await withClient(async (client) => {
-    return await client.sql`
-      SELECT 
-        service_id,
-        COUNT(*)::INTEGER as total_checks,
-        SUM(CASE WHEN is_success = TRUE THEN 1 ELSE 0 END)::INTEGER as successful_checks
-      FROM monitoring_logs
-      GROUP BY service_id
-    `;
-  });
+  const stats = statsQuery.all() as { service_id: string, total_checks: number, successful_checks: number }[];
   
-  const stats = result.rows;
-  
-  return stats.map((s: any) => {
+  return stats.map(s => {
     const availability = (s.successful_checks / s.total_checks) * 100;
     return {
       ...s,
@@ -94,66 +89,44 @@ export async function getStats() {
   });
 }
 
-export async function getLogs(page = 1, limit = 100, startDate?: string, endDate?: string) {
-  await initDb();
+export function getLogs(page = 1, limit = 100, startDate?: string, endDate?: string) {
   const offset = (page - 1) * limit;
+  let query = 'SELECT * FROM monitoring_logs';
+  const params: any[] = [];
   
-  return await withClient(async (client) => {
-    let logsResult;
-    let countResult;
-
-    if (startDate && endDate) {
-      logsResult = await client.sql`
-        SELECT * FROM monitoring_logs 
-        WHERE date >= ${startDate} AND date <= ${endDate} 
-        ORDER BY timestamp DESC LIMIT ${limit} OFFSET ${offset}
-      `;
-      countResult = await client.sql`
-        SELECT COUNT(*)::INTEGER as count FROM monitoring_logs 
-        WHERE date >= ${startDate} AND date <= ${endDate}
-      `;
-    } else if (startDate) {
-      logsResult = await client.sql`
-        SELECT * FROM monitoring_logs 
-        WHERE date = ${startDate} 
-        ORDER BY timestamp DESC LIMIT ${limit} OFFSET ${offset}
-      `;
-      countResult = await client.sql`
-        SELECT COUNT(*)::INTEGER as count FROM monitoring_logs 
-        WHERE date = ${startDate}
-      `;
-    } else if (endDate) {
-      logsResult = await client.sql`
-        SELECT * FROM monitoring_logs 
-        WHERE date = ${endDate} 
-        ORDER BY timestamp DESC LIMIT ${limit} OFFSET ${offset}
-      `;
-      countResult = await client.sql`
-        SELECT COUNT(*)::INTEGER as count FROM monitoring_logs 
-        WHERE date = ${endDate}
-      `;
-    } else {
-      logsResult = await client.sql`
-        SELECT * FROM monitoring_logs 
-        ORDER BY timestamp DESC LIMIT ${limit} OFFSET ${offset}
-      `;
-      countResult = await client.sql`
-        SELECT COUNT(*)::INTEGER as count FROM monitoring_logs
-      `;
-    }
-
-    return {
-      logs: logsResult.rows,
-      total: countResult.rows[0].count,
-      page,
-      totalPages: Math.ceil(countResult.rows[0].count / limit)
-    };
-  });
+  if (startDate && endDate) {
+    query += ' WHERE date >= ? AND date <= ?';
+    params.push(startDate, endDate);
+  } else if (startDate) {
+    query += ' WHERE date = ?';
+    params.push(startDate);
+  } else if (endDate) {
+    query += ' WHERE date = ?';
+    params.push(endDate);
+  }
+  
+  query += ' ORDER BY timestamp DESC LIMIT ? OFFSET ?';
+  params.push(limit, offset);
+  
+  let countQuery;
+  if (startDate && endDate) {
+    countQuery = db.prepare('SELECT COUNT(*) as count FROM monitoring_logs WHERE date >= ? AND date <= ?').get(startDate, endDate) as { count: number };
+  } else if (startDate) {
+    countQuery = db.prepare('SELECT COUNT(*) as count FROM monitoring_logs WHERE date = ?').get(startDate) as { count: number };
+  } else if (endDate) {
+    countQuery = db.prepare('SELECT COUNT(*) as count FROM monitoring_logs WHERE date = ?').get(endDate) as { count: number };
+  } else {
+    countQuery = db.prepare('SELECT COUNT(*) as count FROM monitoring_logs').get() as { count: number };
+  }
+    
+  return {
+    logs: db.prepare(query).all(...params),
+    total: countQuery.count,
+    page,
+    totalPages: Math.ceil(countQuery.count / limit)
+  };
 }
 
-export async function clearDatabase() {
-  await initDb();
-  await withClient(async (client) => {
-    await client.sql`DELETE FROM monitoring_logs`;
-  });
+export function clearDatabase() {
+  db.exec('DELETE FROM monitoring_logs');
 }

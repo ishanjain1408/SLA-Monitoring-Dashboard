@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     }
 
     const text = await file.text();
-    const result = await processCsvData(text);
+    const result = processCsvData(text);
     
     return NextResponse.json({
       message: 'Upload successful',
