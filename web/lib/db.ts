@@ -1,8 +1,8 @@
 import Database from 'better-sqlite3';
 import path from 'path';
 
-// Connect to SQLite DB in the root of the project
-const dbPath = path.join(process.cwd(), 'earthre_sla.db');
+// Connect to SQLite DB in the root of the project (or use DB_PATH for deployment)
+const dbPath = process.env.DB_PATH || path.join(process.cwd(), 'earthre_sla.db');
 const db = new Database(dbPath, { verbose: console.log });
 
 // Initialize database schema

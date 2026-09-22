@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: sla-monitoring-dashboard
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: DB_PATH
+        value: /data/earthre_sla.db
+    disk:
+      name: sqlite-data
+      mountPath: /data
+      sizeGB: 1
